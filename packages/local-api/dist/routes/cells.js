@@ -18,6 +18,7 @@ const path_1 = __importDefault(require("path"));
 const promises_1 = __importDefault(require("fs/promises"));
 function createCellsRouter(filename, dir) {
     const router = express_1.default.Router();
+    router.use(express_1.default.json());
     const fullPath = path_1.default.join(dir, filename);
     router.get('/cells', (req, res) => __awaiter(this, void 0, void 0, function* () {
         const isLocalApiError = (err) => {
