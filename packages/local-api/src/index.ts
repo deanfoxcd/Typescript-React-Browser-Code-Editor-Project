@@ -1,6 +1,7 @@
 import express from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import path from 'path';
+import { createCellsRouter } from './routes/cells';
 
 export function serve(
   port: number,
@@ -22,6 +23,8 @@ export function serve(
     const packagePath = require.resolve('jbook/build/index.html');
     app.use(express.static(path.dirname(packagePath)));
   }
+
+  app.use(createCellsRouter(filename, dir));
 
   return new Promise<void>((resolve, reject) => {
     const server = app.listen(port, () => {
