@@ -9,12 +9,34 @@ interface Cell {
   type: 'text' | 'code';
 }
 
+interface LocalApiError {
+  code: string;
+}
+
 export function createCellsRouter(filename: string, dir: string) {
   const router = express.Router();
 
   const fullPath = path.join(dir, filename);
 
-  router.get('/cells', async (req, res) => {});
+  router.get('/cells', async (req, res) => {
+    const isLocalApiError = (err: any): err is LocalApiError => {
+      return typeof err.code === 'string';
+    };
+
+    try {
+      const result = await fs.readFile(fullPath, { encoding: 'utf-8' });
+      res.send(JSON.parse(result));
+    } catch (err) {
+      if (isLocalApiError(err)) {
+        if (err.code === 'ENOENT') {
+          await fs.writeFile(fullPath, '[]', 'utf-8');
+          res.send([]);
+        }
+      } else {
+        throw err;
+      }
+    }
+  });
 
   router.post('/cells', async (req, res) => {
     const { cells }: { cells: Cell[] } = req.body;
