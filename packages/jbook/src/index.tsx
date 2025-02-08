@@ -14,8 +14,6 @@ const App = () => {
   return (
     <Provider store={store}>
       <div>
-        {/* <CodeCell /> */}
-        {/* <TextEditor /> */}
         <CellList />
       </div>
     </Provider>
