@@ -69,6 +69,19 @@ const cellsReducer = produce(
 
         return state;
 
+      case ActionType.FETCH_CELLS:
+        state.loading = true;
+        state.error = null;
+        return state;
+
+      case ActionType.FETCH_CELLS_COMPLETE:
+        return state;
+
+      case ActionType.FETCH_CELLS_ERROR:
+        state.loading = false;
+        state.error = action.payload;
+        return state;
+
       default:
         return state;
     }
