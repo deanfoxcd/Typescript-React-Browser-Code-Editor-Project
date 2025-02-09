@@ -1,5 +1,5 @@
 {
-  "name": "local-api",
+  "name": "@foxy-jsnote/local-api",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -21,6 +21,6 @@
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "http-proxy-middleware": "^3.0.3",
-    "jbook": "^0.1.0"
+    "@foxy-jsnote/local-client": "^0.1.0"
   }
 }

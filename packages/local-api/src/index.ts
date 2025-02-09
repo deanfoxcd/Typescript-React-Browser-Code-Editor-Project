@@ -22,7 +22,9 @@ export function serve(
       })
     );
   } else {
-    const packagePath = require.resolve('jbook/build/index.html');
+    const packagePath = require.resolve(
+      '@foxy-jsnote/local-client/build/index.html'
+    );
     app.use(express.static(path.dirname(packagePath)));
   }
 
