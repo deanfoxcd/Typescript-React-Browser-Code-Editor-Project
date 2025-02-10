@@ -3,19 +3,27 @@
   "version": "1.0.0",
   "scripts": {
     "start": "tsc --watch --preserveWatchOutput",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepublishOnly": "esbuild src/index.ts --platform=node --outfile=dist/index.js --bundle --minify --define:process.env.NODE_ENV=\\\"production\\\""
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "description": "",
+  "bin": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "dependencies": {
-    "commander": "^13.1.0",
+    "commander": "^11.0.0",
     "@foxy-jsnote/local-api": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.13.1",
+    "esbuild": "0.8.26",
     "typescript": "^5.7.3"
   }
 }
